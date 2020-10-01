@@ -1,6 +1,14 @@
 # user-simulator
 Configurable Discord chatbot that learns from users
 
+# Features
+
+- talks to users
+
+- permamently saves things it learned to a database
+
+- can have a rough understanding of what you're talking about
+
 # Note
 It's a good idea to take a look at the usersim.js file first and change the configuration if you want to. The only thing you *have* to do is set the TOKEN variable to whatever the token of your bot is.
 
