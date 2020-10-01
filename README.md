@@ -5,7 +5,7 @@ Configurable Discord chatbot that learns from users
 
 - talks to users
 
-- permamently saves things it learned to a database
+- permanently saves things it learned to a database
 
 - can have a rough understanding of what you're talking about
 
