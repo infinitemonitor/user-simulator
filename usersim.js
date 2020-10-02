@@ -35,7 +35,6 @@ bot.on("ready", async () => {
 		
 		console.log(`[${bot.guilds.cache.size}] ${bot.guilds.cache.map(g => g.name).join(", ")}`)
 		
-		bot.user.setPresence({ activity: { name: "/help" }})
 		
 }) //do all of this when ready
 
