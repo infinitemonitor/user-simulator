@@ -1,0 +1,2 @@
+nodemon usersim.js
+pause
