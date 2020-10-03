@@ -9,8 +9,8 @@ const bot = new discord.Client({disableEveryone: true})
 const fs = require("fs")
 
 if(!fs.readdirSync("./").includes("db.json")) {
-		fs.writeFileSync("./db.json", "{}")
-		console.log("Database does not exist, so a new file was created")
+	fs.writeFileSync("./db.json", "{}")
+	console.log("Database does not exist, so a new file was created")
 }
 let db = require("./db.json") //get the database (or make a new file if it does not exist)
 keys = Object.keys(db) //turn the db into an array to perform array operations on it
@@ -28,14 +28,11 @@ function think(filter, strict) {
 }
 
 bot.on("ready", async () => {
+	console.log("Ready")
+	let link = await bot.generateInvite(["SEND_MESSAGES"])
+	console.log(link)
 	
-		console.log("Ready")
-		let link = await bot.generateInvite(["SEND_MESSAGES"])
-		console.log(link)
-		
-		console.log(`[${bot.guilds.cache.size}] ${bot.guilds.cache.map(g => g.name).join(", ")}`)
-		
-		
+	console.log(`[${bot.guilds.cache.size}] ${bot.guilds.cache.map(g => g.name).join(", ")}`)
 }) //do all of this when ready
 
 bot.on("message", async message => {
@@ -48,17 +45,16 @@ bot.on("message", async message => {
 	console.log(`[${message.guild.name}] ${message.author.tag} > ${message.cleanContent}`)
 	
 	if(!keys.includes(message.cleanContent) && message.content.length > 0 && LEARNS_FROM.includes(message.channel.name) && !message.content.includes("discord.gg")) {
-		
-			db[message.cleanContent] = {
-					author: message.author.tag,
-					authorId: message.author.id
-			} //make a db entry
+		db[message.cleanContent] = {
+			author: message.author.tag,
+			authorId: message.author.id
+		} //make a db entry
 			
-			await fs.writeFile("./db.json", JSON.stringify(db, null, 4), err => {
-				if(err) throw err;
-			}) //ctrl+s
+		await fs.writeFile("./db.json", JSON.stringify(db, null, 4), err => {
+			if(err) throw err;
+		}) //ctrl+s
 			
-			keys = Object.keys(db)
+		keys = Object.keys(db)
 	} //if the message isnt in the database and is in a channel that the bot can learn from, add it
 	
 	if(!TALKS_IN.includes(message.channel.name)) return;
@@ -71,7 +67,6 @@ bot.on("message", async message => {
 	} catch(e) {
 		message.reply("Something went wrong, try again") //if something goes horribly wrong
 	}
-	
 })
 
 if(!TOKEN || typeof TOKEN !== "string") return console.log("Token is invalid! Check the TOKEN variable in the bot code and type 'rs' when done.")
