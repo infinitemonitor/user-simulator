@@ -59,7 +59,10 @@ bot.on("message", async message => {
 	
 	if(!TALKS_IN.includes(message.channel.name)) return;
 	
-	m = think(message.content.split(" ")[0], false) //run think() with the first word of the message
+	x = 0
+	while(x < message.content.split(" ").length-1 && Math.random() < 0.72) x++ //choose a word, words closer to the end of the message are less likely to be picked
+	
+	m = think(message.content.split(" ")[x], false) //run think() with the chosen word (x)
 	
 	try {
 		await message.channel.send(m) //send le message
